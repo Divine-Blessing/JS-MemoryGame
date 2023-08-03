@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Special+Elite&display=swap');
+*, *::before, *::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+:root{
+    --body-bg: #3c260a;
+    --mid: #61360d;
+    --jost: 'Jost', sans-serif;
+    --rale: 'Raleway', sans-serif;
+    --elite: 'Special Elite', cursive;
+}
+/* BEGINNING OF PAGE LOADER */
+#preloader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--body-bg);
+  color: white;
+  position: fixed;
+  z-index: 1000;
+}
+#preloader .ring{
+  position: absolute;
+  height: 250px;
+  width: 300px;
+  border-radius: 50%;
+  animation: ring 2s linear infinite;
+}
+@keyframes ring {
+  0%{
+      transform: rotate(0deg);
+      box-shadow: 1px 5px 2px #723c0a;
+  }
+  50%{
+      transform: rotate(180deg);
+      box-shadow: 1px 5px 2px #d1741c;
+  }
+  100%{
+      transform: rotate(360deg);
+      box-shadow: 1px 5px 2px #723c0a;
+  }
+}
+#preloader .ring::before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+#preloader .load{
+  color: rgb(161, 161, 161);
+  font-family: 'Kalam', cursive;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: text 3s ease-in-out infinite;
+}
+@keyframes text{
+  50%{
+      color: var(--body-bg);
+  }
+}
+.abs-bottom{
+  position: absolute;
+  bottom: 10px;
+  font-size: 20px;
+  font-weight: lighter;
+  font-family: var(--jost);
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+.abs-bottom > span{
+  font-size: 30px;
+  color: var(--mid);
+}
+/* END OF PRELOADER */
+
+body{
+    background: var(--body-bg);
+    cursor: url(./images/pointer-regular-24.png), auto;
+}
+#hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--rale);
+}
+#container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+    width: 40%;
+    padding: 30px 0;
+    border-radius: 12px;
+    background: linear-gradient(to bottom, #61360d, rgb(168, 168, 161), #61360d );
+    box-shadow: 1px 2px 25px rgba(0, 0, 0, 0.4);
+}
+h2{
+    font-size: 3em;
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.game{
+    width: 440px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+.item{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    background: linear-gradient( rgb(240, 221, 221), rgb(252, 195, 120));
+    cursor: pointer;
+    transform: rotateY(180deg);
+    transition: 250ms ease-in-out;
+}
+.item::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--mid);
+    transform: rotateY(0deg);
+    transition: 250ms ease-in-out;
+    backface-visibility: hidden;
+}
+.item:hover::after{
+    background-color: #b35f12;
+}
+.item:active{
+    scale: 0.9;
+}
+.item.boxOpen{
+    transform: rotateY(0deg);
+}
+.boxOpen:after, .boxMatch::after{
+    transform: rotateY(180deg);
+}
+.reset{
+    position: absolute;
+    bottom: -1.3em;
+    color: rgb(223, 217, 217);
+    background: linear-gradient(to right, rgb(136, 67, 2), rgb(245, 159, 78));
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    height: 45px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reset:hover, .reset:active, .reset:focus{
+    background: white;
+    color: var(--body-bg);
+    font-weight: 600;
+    transition: 250ms ease-in-out;
+}
+footer{
+    min-height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    font-family: var(--elite);
+}
+footer span > span{
+    font-size: 30px;
+    color: beige;
+}
+
+/* RESPONSIVENESS STARTS HERE */
+@media(max-width: 1200px){
+  #container{
+    width: 50%;
+  }
+}
+@media(max-width: 1100px){
+  #container{
+    width: 60%;
+  }
+  .game{
+    height: 85%;
+    width: 80%;
+    flex-direction: row;
+    margin: .5rem 0;
+  }
+  .reset{
+    bottom: -2.5em;
+  }
+}
+@media(max-width: 1000px){
+  .game{
+    height: 80%;
+    width: 85%;
+    flex-direction: row;
+    margin: .5rem 0;
+    gap: 8px;
+  }
+  .item{
+    width: 80px;
+    height: 80px;
+    font-size: 3em;
+  }
+  .reset{
+    bottom: -2.7em;
+  }
+}
+@media(max-width: 850px){
+  h2{
+    font-size: 2.5em;
+  }
+  .reset{
+    height: 40px;
+    width: 170px;
+    font-size: 18px;
+  }
+}
+@media(max-width: 674px){
+  #preloader .ring{
+    height: 200px;
+    width: 250px;
+  }
+  #preloader .load{
+    font-size: 18px;
+  }
+  .abs-bottom{
+    font-size: 18px;
+  }
+  #container{
+    width: 70%;
+  }
+  h2{
+    font-size: 2em;
+  }
+  .item{
+    width: 75px;
+    height: 75px;
+    font-size: 3em;
+  }
+  .reset{
+    bottom: -3em;
+  }
+}
+@media(max-width: 540px){
+  .game{
+    width: 90%;
+  }
+  .reset{
+    bottom: -3.2em;
+  }
+}
+@media(max-width:  514px){
+  .item{
+    width: 70px;
+    height: 70px;
+  }
+}
+@media(max-width: 482px){
+  #container{
+    width: 75%;
+  }
+  .game{
+    width: 95%;
+    width: 2px solid yellow;
+  }
+}
+@media(max-width: 440px){
+  .item{
+    width: 60px;
+    height: 60px;
+    font-size: 2.2em;
+  }
+  .reset{
+    bottom: -3em;
+    font-size: 17px;
+    height: 35px;
+    width: 160px;
+  }
+}
+@media(max-width: 390px) {
+  #container{
+    width: 80%;
+  }
+}
+@media(max-width: 355px){
+  .item{
+    width: 55px;
+    height: 55px;
+    font-size: 2.2em;
+  }
+}
+@media(max-width: 335px){
+  #preloader .ring{
+    height: 150px;
+    width: 200px;
+  }
+  #preloader .load{
+    font-size: 15px;
+  }
+  .abs-bottom{
+    font-size: 15px;
+  }
+  #container{
+    width: 85%;
+  }
+  .item{
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+  }
+}
+@media(max-width: 295px){
+  #container{
+    width: 90%;
+  }
+  .item{
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+  }
+  h2{
+    font-size: 1.8em;
+  }
+  .reset{
+    width: 150px;
+  }
+}
+@media(max-width: 262px){
+  .item{
+    width: 40px;
+    height: 40px;
+    font-size: 1.8em;
+  }
+  .reset{
+    font-size: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* WEARABLES */
+@media (max-device-width: 218px) and (max-device-height: 281px) { 
+    #container{
+        width: 100%;
+        padding: 10px 0;
+    }
+    h2{
+        font-size: 20px;
+    }
+    .game{
+        width: 90%;
+        height: 85%;
+        gap: 10px;
+    }
+    .item{
+        width: 35px;
+        height: 35px;
+        font-size: 15px;
+    }
+    .reset{
+        bottom: -1.4em;
+        font-size: 12px;
+        height: 25px;
+        width: 100px;
+    }
+}
+
+
+/* THIS IS FOR LAPTOPS */
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+}
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* FOR ANOTHER PROJECT */
+/* .thebox{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background: repeating-conic-gradient(from var(--a),blue 0%, blue 5%, transparent 5%, transparent 40%, blue 50%);
+    animation: animate 4s linear infinite;
+    border-radius: 20px;
+}
+@property --a{
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+@keyframes animate{
+    0%{
+        --a: 0deg;
+    }
+    100%{
+        --a: 360deg;
+    }
+}
+.thebox::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(from var(--a),pink 0%, pink 5%, transparent 5%, transparent 40%, pink 50%);
+    animation: animate 4s linear infinite;
+    animation-delay: -1s;
+    border-radius: 20px;
+}
+.thebox::after{
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background-color: black;
+    border-radius: 15px;
+    border: 8px solid var(--body-bg);
+} */
+/* But with box instead */
